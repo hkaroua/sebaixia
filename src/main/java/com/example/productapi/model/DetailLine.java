@@ -1,107 +1,76 @@
 package com.example.productapi.model;
 
-public class DetailLine {
-    private double unitPrice;
-    private double quantity;
-    private double totalPrice;
-    private String designation;
-    private String detail;
-    private String cpe;
-    private String cpCpe;
-    private UserType userType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 
-    // Constructeurs
+@Entity
+@Table(name = "detail_lines")
+public class DetailLine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "detail_id")
+    @NotNull(message = "Detail cannot be null")
+    private Detail detail;
+    
+    @NotBlank(message = "Description is required")
+    private String description;
+    
+    @PositiveOrZero(message = "Amount must be zero or positive")
+    private double amount;
+    
+    // Constructors
     public DetailLine() {
     }
-
-    public DetailLine(double unitPrice, double quantity, double totalPrice, String designation,
-                     String detail, String cpe, String cpCpe, UserType userType) {
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
-        this.designation = designation;
-        this.detail = detail;
-        this.cpe = cpe;
-        this.cpCpe = cpCpe;
-        this.userType = userType;
+    
+    public DetailLine(String description, double amount) {
+        this.description = description;
+        this.amount = amount;
     }
-
-    // Getters et Setters
-    public double getUnitPrice() {
-        return unitPrice;
+    
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public String getDetail() {
+    
+    public Detail getDetail() {
         return detail;
     }
-
-    public void setDetail(String detail) {
+    
+    public void setDetail(Detail detail) {
         this.detail = detail;
     }
-
-    public String getCpe() {
-        return cpe;
+    
+    public String getDescription() {
+        return description;
     }
-
-    public void setCpe(String cpe) {
-        this.cpe = cpe;
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public String getCpCpe() {
-        return cpCpe;
+    
+    public double getAmount() {
+        return amount;
     }
-
-    public void setCpCpe(String cpCpe) {
-        this.cpCpe = cpCpe;
+    
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
+    
     @Override
     public String toString() {
         return "DetailLine{" +
-                "unitPrice=" + unitPrice +
-                ", quantity=" + quantity +
-                ", totalPrice=" + totalPrice +
-                ", designation='" + designation + '\'' +
-                ", detail='" + detail + '\'' +
-                ", cpe='" + cpe + '\'' +
-                ", cpCpe='" + cpCpe + '\'' +
-                ", userType=" + userType +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
                 '}';
     }
 }

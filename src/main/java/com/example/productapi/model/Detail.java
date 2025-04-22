@@ -1,20 +1,49 @@
 package com.example.productapi.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import com.example.productapi.model.UserType; // Import UserType if it exists
-import com.example.productapi.model.DetailLine; // Import DetailLine if it exists
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
+@Entity
 public class Detail {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @PositiveOrZero(message = "Unit price must be zero or positive")
     private double unitPrice;
+    
+    @OneToMany(mappedBy = "detail", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetailLine> detailLines;
+    
+    @Min(value = 0, message = "Quantity cannot be negative")
     private int quantity;
+    
+    @PositiveOrZero(message = "Total price must be zero or positive")
     private double totalPrice;
+    
+    @NotBlank(message = "Designation is required")
     private String designation;
+    
+    @NotBlank(message = "CP/CPE is required")
     private String cpCpe;
+    
+    @NotNull(message = "User type is required")
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    // Constructeurs
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @NotNull(message = "Product is required")
+    private DecompositionComercial decompositionComercial;
+
+    // Constructors
     public Detail() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public Detail(double unitPrice, List<DetailLine> detailLines, int quantity, double totalPrice, 
@@ -26,9 +55,18 @@ public class Detail {
         this.designation = designation;
         this.cpCpe = cpCpe;
         this.userType = userType;
+        this.createdAt = LocalDateTime.now();
     }
 
-    // Getters et Setters
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public double getUnitPrice() {
         return unitPrice;
     }
@@ -85,6 +123,22 @@ public class Detail {
         this.userType = userType;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public DecompositionComercial getDecompositionComercial() {
+        return decompositionComercial;
+    }
+
+    public void setDecompositionComercial(DecompositionComercial product) {
+        this.decompositionComercial = product;
+    }
+
     @Override
     public String toString() {
         return "Detail{" +
@@ -95,6 +149,8 @@ public class Detail {
                 ", designation='" + designation + '\'' +
                 ", cpCpe='" + cpCpe + '\'' +
                 ", userType=" + userType +
+                ", createdAt=" + createdAt +
+                ", product=" + decompositionComercial +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.example.productapi.controller;
 
+import com.example.productapi.model.Product;
 import com.example.productapi.service.ProductService;
-import com.example.productapi.model.DecompositionComercial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +15,12 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    public DecompositionComercial createProduct(@RequestBody DecompositionComercial product) {
+    public Product createProduct(@RequestBody Product product) {
         return productService.createProduct(product);
     }
 
     @GetMapping("/{id}")
-    public Optional<DecompositionComercial> getProduct(@PathVariable Long id) {
+    public Optional<Product> getProduct(@PathVariable Long id) {
         return productService.getProduct(id);
     }
 }
