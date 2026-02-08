@@ -1,0 +1,11 @@
+# Namen: <bitte eintragen>
+Hausaufgabe 3
+
+(a) Die erste Schleife laeuft n-mal, danach ist i = 2^n. Die zweite Schleife laeuft
+i-mal, also 2^n-mal. Gesamt O(n + 2^n) = O(2^n).
+
+(b) Bei n >= 0 wird die while-Schleife genau einmal durchlaufen, da i nach dem ersten
+Schritt 1 ist und dann i**2 > 0 gilt. Laufzeit O(1).
+
+(c) n = len(L). Die beiden for-Schleifen laufen je n-mal, also n^2. Die while-Schleife
+laeuft max(0, n - 3) = O(n)-mal und ihr Rumpf ist konstant. Gesamt O(n^3).

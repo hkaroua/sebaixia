@@ -1,0 +1,12 @@
+# Namen: <bitte eintragen>
+Hausaufgabe 1
+
+(a) f in O(g) und g in O(f).
+f in O(g): c = 6, n0 = 0. Fuer n > 0 gilt 6 n^2 <= 6 (n + 1)^2.
+g in O(f): c = 1, n0 = 0. Fuer n > 0 gilt (n + 1)^2 = n^2 + 2n + 1 <= 6 n^2 = f(n).
+
+(b) g in O(f), f nicht in O(g).
+g in O(f): c = 12, n0 = 0. Fuer n > 0 gilt 12 n^2 <= 12 n^3 <= 12 (n^3 + 5).
+
+(c) g in O(f), f nicht in O(g).
+g in O(f): c = 1, n0 = 0. Fuer n > 0 gilt 3n <= 22 n^3 + n^2.
