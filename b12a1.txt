@@ -1,0 +1,20 @@
+# Namen: TODO
+
+Aufgabe 1
+
+(a) f(n) = 6n^2, g(n) = (n + 1)^2
+    f in O(g): c = 6, n0 = 0, denn fuer alle n > 0 gilt
+    6n^2 <= 6(n + 1)^2.
+    g in O(f): c = 1, n0 = 0, denn fuer alle n > 0 gilt
+    (n + 1)^2 = n^2 + 2n + 1 <= 4n^2 <= 6n^2 = f(n).
+    => Beide Richtungen gelten.
+
+(b) f(n) = n^3 + 5, g(n) = 12n^2
+    g in O(f): c = 12, n0 = 1, denn fuer alle n > 1 gilt
+    12n^2 <= 12n^3 <= 12(n^3 + 5).
+    f ist nicht in O(g).
+
+(c) f(n) = 22n^3 + n^2, g(n) = 3n
+    g in O(f): c = 1, n0 = 0, denn fuer alle n > 0 gilt
+    3n <= 22n^3 <= 22n^3 + n^2 = f(n).
+    f ist nicht in O(g).
