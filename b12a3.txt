@@ -1,0 +1,8 @@
+# Namen: Bitte eintragen
+Aufgabe 3
+(a) Die erste for-Schleife laeuft n mal und setzt i = 2^n. Die zweite for-Schleife laeuft
+    i = 2^n mal. Gesamt O(n + 2^n) = O(2^n).
+(b) Die while-Schleife wird immer genau einmal durchlaufen: i wird 1 und i**2 > 0 ist
+    sofort wahr, daher break. Worst-Case O(1).
+(c) Die beiden aeusseren for-Schleifen laufen je n mal, also n^2 Iterationen. Die innere
+    while-Schleife laeuft von k = 3 bis k = n-1, also O(n) pro (i,j). Gesamt O(n^3).

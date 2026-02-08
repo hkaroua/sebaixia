@@ -1,0 +1,9 @@
+# Namen: Bitte eintragen
+Aufgabe 1
+(a) f in O(g) und g in O(f).
+    f in O(g): waehle c = 6, n0 = 1. Fuer n > 1 gilt 6n^2 <= 6(n+1)^2.
+    g in O(f): waehle c = 1, n0 = 1. Fuer n > 1 gilt (n+1)^2 <= 6n^2.
+(b) f nicht in O(g); g in O(f).
+    g in O(f): waehle c = 12, n0 = 1. Fuer n > 1 gilt 12n^2 <= 12n^3 <= 12(n^3+5).
+(c) f nicht in O(g); g in O(f).
+    g in O(f): waehle c = 1, n0 = 1. Fuer n > 1 gilt 3n <= 22n^3 + n^2.
