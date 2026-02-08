@@ -1,0 +1,18 @@
+# Name: TODO
+Hausaufgabe 1
+
+(a) f(n) = 6n^2, g(n) = (n + 1)^2
+    f in O(g): Waehle c = 6 und n0 = 0. Fuer alle n > 0 gilt
+    6n^2 <= 6(n + 1)^2 = c * g(n).
+    g in O(f): Fuer n >= 1 gilt (n + 1)^2 <= 6n^2, also
+    g(n) <= 1 * f(n) fuer alle n > 0. Waehle c = 1, n0 = 0.
+
+(b) f(n) = n^3 + 5, g(n) = 12n^2
+    g in O(f): Waehle c = 12 und n0 = 0. Fuer alle n > 0 gilt
+    12n^2 <= 12n^3 <= 12(n^3 + 5) = c * f(n).
+    f nicht in O(g), da n^3 schneller waechst als n^2.
+
+(c) f(n) = 22n^3 + n^2, g(n) = 3n
+    g in O(f): Waehle c = 1 und n0 = 0. Fuer alle n > 0 gilt
+    3n <= 22n^3 + n^2 = c * f(n).
+    f nicht in O(g), da n^3 schneller waechst als n.

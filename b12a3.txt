@@ -1,0 +1,16 @@
+# Name: TODO
+Hausaufgabe 3
+
+(a) programm1(n)
+    Die erste for-Schleife laeuft n mal, danach ist i = 2^n.
+    Die zweite for-Schleife laeuft i = 2^n mal.
+    Insgesamt O(n + 2^n) = O(2^n).
+
+(b) programm2(n)
+    Nach der ersten Iteration ist i = 1 und i**2 > 0, daher wird sofort gebrochen.
+    Die Schleife laeuft immer genau einmal, also O(1).
+
+(c) programm3(L), n = len(L)
+    Die beiden for-Schleifen laufen je n mal, also n^2 Iterationen.
+    Die innere while-Schleife laeuft (fuer n >= 3) n-3 mal, also O(n).
+    Insgesamt O(n^2 * n) = O(n^3) im Worst-Case.
