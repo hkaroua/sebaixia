@@ -1,0 +1,19 @@
+# Namen: TODO
+
+Aufgabe 3
+
+(a) Worst-Case: O(2^n)
+    Die erste for-Schleife laeuft n-mal und setzt i auf 2^n.
+    Die zweite for-Schleife laeuft i-mal, also 2^n-mal.
+    Insgesamt O(n + 2^n) = O(2^n).
+
+(b) Worst-Case: O(1)
+    Die while-Schleife laeuft fuer jedes n >= 0 genau einmal:
+    i wird auf 1 gesetzt und die Bedingung i**2 > 0 ist dann wahr,
+    daher wird sofort gebreakt.
+
+(c) Worst-Case: O(n^3) fuer n = len(L)
+    Die beiden for-Schleifen laufen je n-mal, zusammen n^2 Iterationen.
+    In jeder Iteration laeuft die while-Schleife von k = 3 bis k = n-1,
+    also hoechstens (n - 3) = O(n) Schritte.
+    Insgesamt O(n^2 * n) = O(n^3).
