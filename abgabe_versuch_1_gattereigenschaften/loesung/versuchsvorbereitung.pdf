@@ -1,0 +1,365 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 1715 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
+(VERSUCHSVORBEREITUNG VERSUCH 1 - GATTEREIGENSCHAFTEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(4.1 Inverter - Vorbereitung) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(1. Arduino-Programm fuer PWM mit Potentiometer) Tj
+T*
+() Tj
+T*
+(Das Arduino-Programm befindet sich in:) Tj
+T*
+() Tj
+T*
+(- arduino/pwm_potentiometer.ino) Tj
+T*
+(- wokwi/sketch.ino) Tj
+T*
+() Tj
+T*
+(Der Arduino Uno erzeugt das PWM-Signal auf Pin 9. Dafuer wird Timer1 im) Tj
+T*
+(Fast-PWM-Modus mit 8 Bit Aufloesung ohne Vorteiler betrieben.) Tj
+T*
+() Tj
+T*
+(Berechnung der PWM-Frequenz:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(f_PWM = f_CPU / 256 = 16 MHz / 256 = 62,5 kHz) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Der Duty-Cycle wird ueber ein Potentiometer an Analog-Eingang A0 eingestellt.) Tj
+T*
+(Der gelesene Wert von 0 bis 1023 wird auf einen PWM-Vergleichswert von 0 bis) Tj
+T*
+(255 abgebildet. In der Wokwi-Simulation ist eine LED am PWM-Ausgang) Tj
+T*
+(angeschlossen, sodass die Helligkeit vom Duty-Cycle abhaengt.) Tj
+T*
+() Tj
+T*
+(Anschluss:) Tj
+T*
+() Tj
+T*
+(- Potentiometer: aeussere Anschluesse an 5 V und GND, Schleifer an A0) Tj
+T*
+(- LED: Pin 9 ueber Vorwiderstand an LED-Anode, LED-Kathode an GND) Tj
+T*
+() Tj
+T*
+(2. Wokwi-Simulation) Tj
+T*
+() Tj
+T*
+(Die Simulation ist durch die Dateien im Ordner wokwi/ vorbereitet:) Tj
+T*
+() Tj
+T*
+(- sketch.ino) Tj
+T*
+(- diagram.json) Tj
+T*
+(- wokwi_project_link.txt) Tj
+T*
+() Tj
+T*
+(Damit kann das Projekt in Wokwi mit Arduino Uno, Potentiometer und LED) Tj
+T*
+(nachgebildet und simuliert werden.) Tj
+T*
+() Tj
+T*
+(3. Zeitkonstante fuer Tiefpassfilter 1. Ordnung) Tj
+T*
+() Tj
+T*
+(Gegeben ist die gewuenschte 3-dB-Grenzfrequenz:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(f = 8 Hz) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Fuer einen Tiefpass 1. Ordnung gilt:) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 1512 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
+() Tj
+T*
+() Tj
+T*
+(f_3dB = 1 / \(2 * pi * R * C\)) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Damit ergibt sich fuer die Zeitkonstante:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(R * C = 1 / \(2 * pi * f\)) Tj
+T*
+(R * C = 1 / \(2 * pi * 8 Hz\)) Tj
+T*
+(R * C = 0,0199 s) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Die benoetigte Zeitkonstante ist daher:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(tau = R * C = 19,9 ms) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Wenn im Versuch ein Widerstand von R = 2 kOhm verwendet wird, ergibt sich:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(C = tau / R) Tj
+T*
+(C = 0,0199 s / 2000 Ohm) Tj
+T*
+(C = 9,95 uF) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Ein passender praktischer Wert ist daher:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(C = 10 uF) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(4.2 Ringoszillator - Vorbereitung) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(1. Bedingung fuer die Anzahl N der Inverter) Tj
+T*
+() Tj
+T*
+(Damit ein Ringoszillator schwingen kann, muss die Anzahl der hintereinander) Tj
+T*
+(geschalteten Inverter ungerade sein:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(N = 3, 5, 7, 9, 11, ...) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Begruendung: Jeder Inverter dreht die Phase um 180 Grad. Bei einer ungeraden) Tj
+T*
+(Anzahl von Invertern liegt am Eingang des ersten Inverters nach dem Rueckkoppeln) Tj
+T*
+(das invertierte Signal an. Dadurch gibt es keinen stabilen statischen Zustand.) Tj
+T*
+(Wegen der endlichen Gatterlaufzeiten laeuft die Pegelaenderung durch die) Tj
+T*
+(Inverterkette und es entsteht eine Oszillation.) Tj
+T*
+() Tj
+T*
+(Bei einer geraden Anzahl von Invertern waere die Rueckkopplung nicht invertierend.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 1294 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
+(Die Schaltung koennte dann in einem stabilen Zustand bleiben und wuerde nicht) Tj
+T*
+(selbststaendig oszillieren.) Tj
+T*
+() Tj
+T*
+(2. Formel fuer die Verlustkapazitaet eines Inverters) Tj
+T*
+() Tj
+T*
+(Aus der dynamischen Leistungsaufnahme eines CMOS-Gatters:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(P_dyn = V_CC^2 * C_pd * f) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Fuer einen Ringoszillator mit N Invertern gilt fuer die gesamte dynamische) Tj
+T*
+(Leistungsaufnahme:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(P_ges = N * V_CC^2 * C_pd1 * f_0) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Gleichzeitig ist:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(P_ges = V_CC * I_CC) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Gleichsetzen und nach C_pd1 aufloesen:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(V_CC * I_CC = N * V_CC^2 * C_pd1 * f_0) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(C_pd1 = I_CC / \(N * V_CC * f_0\)) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Falls ein statischer Ruhestrom beruecksichtigt werden soll, kann man statt) Tj
+T*
+(I_CC den dynamischen Stromanteil verwenden:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(C_pd1 = \(I_CC - I_CC0\) / \(N * V_CC * f_0\)) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Im Versuch kann der Ruhestrom unbenutzter Inverter laut Aufgabenstellung) Tj
+T*
+(vernachlaessigt werden. Daher wird die vereinfachte Formel verwendet:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(C_pd1 = I_CC / \(N * V_CC * f_0\)) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R ] /Count 3 >>
+endobj
+9 0 obj
+<< /Type /Catalog /Pages 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000001846 00000 n 
+0000001972 00000 n 
+0000003536 00000 n 
+0000003662 00000 n 
+0000005008 00000 n 
+0000005134 00000 n 
+0000005205 00000 n 
+trailer
+<< /Size 10 /Root 9 0 R >>
+startxref
+5254
+%%EOF

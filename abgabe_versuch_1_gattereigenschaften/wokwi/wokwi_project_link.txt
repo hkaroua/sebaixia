@@ -1,0 +1,18 @@
+Wokwi-Projektlink / Startlink:
+https://wokwi.com/projects/new/arduino-uno
+
+Hinweis:
+Ein dauerhaft gespeicherter Wokwi-Projektlink kann nur in einem Wokwi-Konto nach
+dem Speichern des Projekts erzeugt werden. Die fertigen Projektdateien liegen in
+diesem Ordner:
+
+- sketch.ino
+- diagram.json
+
+Vorgehen:
+1. Den Link https://wokwi.com/projects/new/arduino-uno oeffnen.
+2. Den Inhalt von sketch.ino in den Arduino-Sketch kopieren.
+3. Den Inhalt von diagram.json als Wokwi-Diagramm verwenden.
+4. Simulation starten: Potentiometer veraendert den Duty-Cycle, die LED zeigt
+   die PWM-Ausgabe auf Pin 9.
+5. Projekt in Wokwi speichern und den danach erzeugten Projektlink abgeben.
