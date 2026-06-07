@@ -36,6 +36,12 @@ Die Simulation ist durch die Dateien im Ordner `wokwi/` vorbereitet:
 - `diagram.json`
 - `wokwi_project_link.txt`
 
+Gespeicherter Wokwi-Projektlink:
+
+```
+https://wokwi.com/projects/466178284645671937
+```
+
 Damit kann das Projekt in Wokwi mit Arduino Uno, Potentiometer und LED
 nachgebildet und simuliert werden.
 

@@ -3,7 +3,7 @@
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 2 0 obj
-<< /Length 1715 >>
+<< /Length 1748 >>
 stream
 BT
 /F1 10 Tf
@@ -89,6 +89,18 @@ T*
 T*
 () Tj
 T*
+(Gespeicherter Wokwi-Projektlink:) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(https://wokwi.com/projects/466178284645671937) Tj
+T*
+() Tj
+T*
+() Tj
+T*
 (Damit kann das Projekt in Wokwi mit Arduino Uno, Potentiometer und LED) Tj
 T*
 (nachgebildet und simuliert werden.) Tj
@@ -100,7 +112,19 @@ T*
 () Tj
 T*
 (Gegeben ist die gewuenschte 3-dB-Grenzfrequenz:) Tj
-T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 1197 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
 () Tj
 T*
 () Tj
@@ -112,19 +136,7 @@ T*
 () Tj
 T*
 (Fuer einen Tiefpass 1. Ordnung gilt:) Tj
-ET
-endstream
-endobj
-3 0 obj
-<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
-endobj
-4 0 obj
-<< /Length 1512 >>
-stream
-BT
-/F1 10 Tf
-50 800 Td
-14 TL
+T*
 () Tj
 T*
 () Tj
@@ -216,7 +228,19 @@ T*
 () Tj
 T*
 (Begruendung: Jeder Inverter dreht die Phase um 180 Grad. Bei einer ungeraden) Tj
-T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 1698 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
 (Anzahl von Invertern liegt am Eingang des ersten Inverters nach dem Rueckkoppeln) Tj
 T*
 (das invertierte Signal an. Dadurch gibt es keinen stabilen statischen Zustand.) Tj
@@ -228,19 +252,7 @@ T*
 () Tj
 T*
 (Bei einer geraden Anzahl von Invertern waere die Rueckkopplung nicht invertierend.) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
-endobj
-6 0 obj
-<< /Length 1294 >>
-stream
-BT
-/F1 10 Tf
-50 800 Td
-14 TL
+T*
 (Die Schaltung koennte dann in einem stabilen Zustand bleiben und wuerde nicht) Tj
 T*
 (selbststaendig oszillieren.) Tj
@@ -332,34 +344,48 @@ T*
 () Tj
 T*
 (C_pd1 = I_CC / \(N * V_CC * f_0\)) Tj
-T*
-() Tj
 ET
 endstream
 endobj
 7 0 obj
-<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
 endobj
 8 0 obj
-<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R ] /Count 3 >>
+<< /Length 37 >>
+stream
+BT
+/F1 10 Tf
+50 800 Td
+14 TL
+() Tj
+ET
+endstream
 endobj
 9 0 obj
-<< /Type /Catalog /Pages 8 0 R >>
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R 9 0 R ] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
 endobj
 xref
-0 10
+0 12
 0000000000 65535 f 
 0000000009 00000 n 
 0000000079 00000 n 
-0000001846 00000 n 
-0000001972 00000 n 
-0000003536 00000 n 
-0000003662 00000 n 
-0000005008 00000 n 
-0000005134 00000 n 
-0000005205 00000 n 
+0000001879 00000 n 
+0000002006 00000 n 
+0000003255 00000 n 
+0000003382 00000 n 
+0000005132 00000 n 
+0000005259 00000 n 
+0000005346 00000 n 
+0000005473 00000 n 
+0000005551 00000 n 
 trailer
-<< /Size 10 /Root 9 0 R >>
+<< /Size 12 /Root 11 0 R >>
 startxref
-5254
+5602
 %%EOF

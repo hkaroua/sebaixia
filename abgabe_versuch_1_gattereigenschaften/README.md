@@ -13,7 +13,6 @@ Diese ZIP-Datei enthaelt die Dateien fuer die Versuchsvorbereitung:
    - `wokwi/diagram.json`
    - `wokwi/wokwi_project_link.txt`
 
-Wichtig:
-Der dauerhaft gespeicherte Wokwi-Link muss nach dem Speichern des Projekts in
-deinem eigenen Wokwi-Konto erzeugt werden. Die notwendigen Dateien fuer die
-Simulation sind aber vollstaendig enthalten.
+Wokwi-Projektlink:
+
+https://wokwi.com/projects/466178284645671937
