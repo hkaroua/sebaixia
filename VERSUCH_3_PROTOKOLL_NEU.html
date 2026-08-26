@@ -1,0 +1,180 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Versuch 3 Protokoll</title><style>body{font-family:Arial,sans-serif;max-width:900px;margin:32px auto;line-height:1.45}h1{font-size:24px}h2{font-size:20px}</style></head><body>
+<h1>Versuchsprotokoll Versuch 3 - Sequentielle Logik</h1>
+<p></p>
+<p>Praktikum: Digitaltechnik</p>
+<p>Versuch: 3 - Sequentielle Logik</p>
+<p>Name: Precious Adaugo Nnamaka</p>
+<p>Betreuer: Prof. Dr.-Ing. Peter Zipf</p>
+<p></p>
+<h2>1 Ziel des Versuchs</h2>
+<p></p>
+<p>Ziel des dritten Versuchs war die Untersuchung sequentieller Logikschaltungen. Im Gegensatz zu rein kombinatorischen Schaltungen haengt der Ausgang einer sequentiellen Schaltung nicht nur von den aktuellen Eingangswerten ab, sondern auch vom gespeicherten Zustand. Im Versuch wurden daher zunaechst verschiedene Speicherelemente aufgebaut und verglichen: RS-Latch, D-Latch, D-Flipflop und T-Flipflop. Anschliessend wurde ein synchroner mod-5-Zaehler mit drei D-Flipflops realisiert, mit einem Arduino getaktet und anhand seiner Zustandsfolge ueberprueft.</p>
+<p></p>
+<h2>2 Verwendete Bauteile und Dateien</h2>
+<p></p>
+<p>Bauteil / Datei | Verwendung</p>
+<p>Arduino Uno | Takterzeugung fuer den Zaehler</p>
+<p>Steckbrett und Leitungen | Aufbau der Schaltungen</p>
+<p>74xx00 / NAND-Gatter | RS-Latch, D-Latch und D-Flipflop</p>
+<p>74xx04 / NOT-Gatter | Invertierung von Signalen</p>
+<p>74xx74 / D-Flipflop | Zaehlerregister</p>
+<p>74xx08 / AND-Gatter | Uebergangslogik des Zaehlers</p>
+<p>74xx32 / OR-Gatter | Uebergangslogik des Zaehlers</p>
+<p>LEDs mit Vorwiderstaenden | Anzeige der Ausgangszustaende</p>
+<p>Versuch3.dig | Simulation der Speicherelemente</p>
+<p>Versuch3_5mod_Zaehler.dig | Simulation des mod-5-Zaehlers</p>
+<p>Arduino-Sketch | Taktsignal an Digitalpin 12</p>
+<p></p>
+<h2>3 Theoretische Grundlagen</h2>
+<p></p>
+<p>Sequentielle Schaltungen besitzen ein Gedaechtnis. Der aktuelle Ausgang kann deshalb vom aktuellen Eingang und vom vorher gespeicherten Zustand abhaengen. Ein einfaches Speicherelement ist das RS-Latch. Es kann ein Bit speichern und besitzt die Funktionen Setzen, Ruecksetzen und Speichern.</p>
+<p></p>
+<p>Beim NAND-RS-Latch sind die Eingaenge aktiv-low. Daher werden sie als S_bar und R_bar bezeichnet. Ein Low-Pegel an S_bar setzt den Ausgang Q auf 1. Ein Low-Pegel an R_bar setzt Q auf 0. Sind beide Eingaenge high, bleibt der vorherige Zustand gespeichert. Die Kombination S_bar = 0 und R_bar = 0 ist verboten, weil beide Ausgaenge gleichzeitig aktiv werden koennen und nach dem Loslassen kein eindeutig definierter Folgezustand garantiert ist.</p>
+<p></p>
+<p>Das D-Latch erweitert das RS-Latch um einen Dateneingang D und einen Takteingang beziehungsweise Enable-Eingang CLK. Bei CLK = 1 ist das Latch transparent, also folgt Q direkt dem Eingang D. Bei CLK = 0 bleibt der zuletzt uebernommene Wert gespeichert.</p>
+<p></p>
+<p>Das D-Flipflop ist flankengesteuert. Der Ausgang Q uebernimmt den Wert von D nur bei der aktiven Taktflanke, hier bei der steigenden Flanke. Zwischen zwei Taktflanken bleibt Q unveraendert. Dadurch ist das D-Flipflop robuster als ein transparentes D-Latch.</p>
+<p></p>
+<p>Ein T-Flipflop kann aus einem D-Flipflop aufgebaut werden, indem der invertierte Ausgang auf den D-Eingang zurueckgefuehrt wird. Dadurch wechselt Q bei jeder aktiven Taktflanke seinen Zustand. Das Ausgangssignal besitzt dadurch die halbe Frequenz des Eingangstaktes.</p>
+<p></p>
+<h2>4 Durchfuehrung und Ergebnisse</h2>
+<p></p>
+<p>4.1 RS-Latch</p>
+<p></p>
+<p>Das RS-Latch wurde aus zwei rueckgekoppelten NAND-Gattern auf dem Steckbrett aufgebaut. Zwei Taster dienten als Eingaben fuer S_bar und R_bar. Pull-Widerstaende verhinderten undefinierte Floating-Pegel. Die Ausgaenge Q und Q_bar wurden mit zwei LEDs angezeigt, jeweils mit Vorwiderstand.</p>
+<p></p>
+<p>Die Funktionspruefung ergab:</p>
+<p></p>
+<p>S_bar | R_bar | Q+ | Funktion</p>
+<h2>1 | 1 | Q | Speichern</h2>
+<h2>0 | 1 | 1 | Setzen</h2>
+<h2>1 | 0 | 0 | Ruecksetzen</h2>
+<h2>0 | 0 | nicht definiert | verboten</h2>
+<p></p>
+<p>Die LEDs bestaetigten die Speicherwirkung. Bei S_bar = R_bar = 1 blieb der zuletzt gespeicherte Zustand erhalten. Ein Low-Pegel an S_bar setzte Q auf 1, ein Low-Pegel an R_bar setzte Q auf 0. Im zulaessigen Betrieb waren Q und Q_bar komplementaer.</p>
+<p></p>
+<p>4.2 D-Latch</p>
+<p></p>
+<p>Anschliessend wurde die Schaltung zu einem D-Latch erweitert. Die beiden Taster wurden nun als Dateneingang D und Takteingang CLK verwendet. Das D-Latch beseitigt die verbotene Eingangskombination des RS-Latches, da intern immer nur ein definierter Setz- oder Ruecksetzzustand erzeugt wird.</p>
+<p></p>
+<p>Die Uebergangstabelle lautet:</p>
+<p></p>
+<p>CLK | D | Q+ | Bedeutung</p>
+<h2>0 | X | Q | Speichern</h2>
+<h2>1 | 0 | 0 | D = 0 wird uebernommen</h2>
+<h2>1 | 1 | 1 | D = 1 wird uebernommen</h2>
+<p></p>
+<p>Bei CLK = 1 war das Latch transparent. Der Ausgang Q folgte also direkt dem Dateneingang D. Bei CLK = 0 blieb der zuvor uebernommene Wert gespeichert, auch wenn sich D danach aenderte. Das Timing-Diagramm zeigt daher, dass Q nur waehrend des aktiven Taktpegels dem Eingang D folgt.</p>
+<p></p>
+<p>4.3 D-Flipflop</p>
+<p></p>
+<p>Im naechsten Schritt wurde die Schaltung zu einem positiv flankengesteuerten D-Flipflop erweitert. Anders als beim D-Latch wird der Eingangswert hier nicht waehrend des gesamten HIGH-Pegels uebernommen, sondern nur an der steigenden Taktflanke.</p>
+<p></p>
+<p>Die Uebergangstabelle lautet:</p>
+<p></p>
+<p>Taktbedingung | D | Q+ | Bedeutung</p>
+<p>keine steigende Flanke | X | Q | Speichern</p>
+<p>steigende CLK-Flanke | 0 | 0 | D = 0 uebernehmen</p>
+<p>steigende CLK-Flanke | 1 | 1 | D = 1 uebernehmen</p>
+<p></p>
+<p>Im Timing-Diagramm wurde sichtbar, dass Q nur an der steigenden Taktflanke den unmittelbar davor anliegenden D-Wert uebernimmt. Zwischen den Flanken bleibt Q konstant. Q_temp beschreibt dabei den Ausgang der internen Master-Stufe. Diese nimmt den Datenwert in der entgegengesetzten Taktphase auf und gibt ihn bei der aktiven Flanke an die Slave-Stufe weiter.</p>
+<p></p>
+<p>4.4 T-Flipflop</p>
+<p></p>
+<p>Das T-Flipflop wurde durch Rueckfuehrung des invertierten Ausgangs Q_bar auf den D-Eingang realisiert. Dadurch wird bei jeder steigenden Taktflanke der jeweils entgegengesetzte Zustand uebernommen.</p>
+<p></p>
+<p>Die Uebergangstabelle lautet:</p>
+<p></p>
+<p>Taktbedingung | Q | Q+ | Funktion</p>
+<p>keine steigende Flanke | Q | Q | Speichern</p>
+<p>steigende CLK-Flanke | 0 | 1 | Umschalten</p>
+<p>steigende CLK-Flanke | 1 | 0 | Umschalten</p>
+<p></p>
+<p>Die Messung bestaetigte, dass Q bei jeder steigenden Taktflanke wechselt. Dadurch gilt fuer die Ausgangsfrequenz:</p>
+<p></p>
+<p>f_Q = f_CLK / 2</p>
+<p></p>
+<p>Das T-Flipflop wirkt damit als Frequenzteiler durch zwei.</p>
+<p></p>
+<p>4.5 Synchroner mod-5-Zaehler</p>
+<p></p>
+<p>Im zweiten Versuchsteil wurde ein synchroner mod-5-Zaehler mit drei D-Flipflops aufgebaut. Alle Flipflops erhielten denselben Takt. Dadurch wechselten alle Registerzustaende synchron zur gleichen Taktflanke. Der Arduino-Ausgang D12 lieferte das Taktsignal.</p>
+<p></p>
+<p>Die Sollfolge des Zaehlers lautet:</p>
+<p></p>
+<h2>000 -&gt; 001 -&gt; 010 -&gt; 011 -&gt; 100 -&gt; 000</h2>
+<p></p>
+<p>Die Zustaende 101, 110 und 111 gehoeren nicht zum regulaeren Zaehlzyklus.</p>
+<p></p>
+<p>Die Zustandsuebergangstabelle lautet:</p>
+<p></p>
+<p>Dezimal | Q2 Q1 Q0 | Q2+ Q1+ Q0+</p>
+<h2>0 | 000 | 001</h2>
+<h2>1 | 001 | 010</h2>
+<h2>2 | 010 | 011</h2>
+<h2>3 | 011 | 100</h2>
+<h2>4 | 100 | 000</h2>
+<p></p>
+<p>Aus den KV-Diagrammen der Vorbereitung ergaben sich folgende minimierte Eingangsfunktionen:</p>
+<p></p>
+<p>D2 = Q1 AND Q0</p>
+<p>D1 = (NOT Q1 AND Q0) OR (Q1 AND NOT Q0)</p>
+<p>D0 = NOT Q2 AND NOT Q0</p>
+<p></p>
+<p>Fuer die Realisierung wurden zwei 74xx74-ICs fuer drei D-Flipflops, ein 74xx08 fuer AND-Verknuepfungen und ein 74xx32 fuer die OR-Verknuepfung benoetigt. Die invertierten Ausgaenge der 74xx74 konnten genutzt werden, sodass keine zusaetzlichen NOT-Gatter fuer diese Signale erforderlich waren.</p>
+<p></p>
+<p>Die nicht belegten Zustaende fuehren mit den verwendeten Gleichungen wieder in den regulaeren Bereich:</p>
+<p></p>
+<p>Zustand 101 -&gt; 010</p>
+<p>Zustand 110 -&gt; 010</p>
+<p>Zustand 111 -&gt; 100</p>
+<p></p>
+<p>Damit ist die Schaltung selbstkorrigierend, da sie nach einem ungueltigen Zustand wieder in einen gueltigen Zustand des mod-5-Zyklus zurueckkehrt.</p>
+<p></p>
+<p>4.6 Arduino-Takt und Timing-Nachweis</p>
+<p></p>
+<p>Der Arduino-Ausgang D12 wurde als gemeinsamer Takteingang verwendet. Der Sketch setzte den Ausgang jeweils 300 ms auf HIGH und 300 ms auf LOW. Damit ergaben sich:</p>
+<p></p>
+<p>HIGH-Zeit = 300 ms</p>
+<p>LOW-Zeit = 300 ms</p>
+<p>Periodendauer T = 600 ms</p>
+<p>Frequenz f = 1 / 0,6 s = ca. 1,67 Hz</p>
+<p></p>
+<p>Die langsame Frequenz war geeignet, um die Zustaende an den LEDs eindeutig zu beobachten. Fuer die Kontrolle wurden CLK sowie Q0, Q1 und Q2 betrachtet. Nach jeder steigenden Taktflanke ergab sich die Folge:</p>
+<p></p>
+<p>000, 001, 010, 011, 100, 000</p>
+<p></p>
+<p>In der wiederholten Sequenz traten keine zusaetzlichen Zustaende, Aussetzer oder fehlerhaften Spruenge auf. Damit wurde die korrekte Funktion des synchronen mod-5-Zaehlers bestaetigt.</p>
+<p></p>
+<h2>5 Mess- und Fotodokumentation</h2>
+<p></p>
+<p>Die ergaenzten Timing-Diagramme bestaetigten das beschriebene Speicherverhalten. Beim RS-Latch waren Setzen, Ruecksetzen und Speichern sichtbar. Beim D-Latch folgte Q dem Eingang D nur waehrend des aktiven Taktpegels. Beim D-Flipflop wurde D nur an der steigenden Taktflanke uebernommen. Beim T-Flipflop wechselte Q mit jeder steigenden Taktflanke.</p>
+<p></p>
+<p>Die Fotodokumentation zeigte ausserdem den real aufgebauten mod-5-Zaehler. Die beobachtete Zustandsfolge entsprach der Sollfolge 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 0. Dadurch wurde die Rueckkehr in den Anfangszustand nach Zustand 4 bestaetigt.</p>
+<p></p>
+<h2>6 Auswertung</h2>
+<p></p>
+<p>Der Versuch zeigt den Unterschied zwischen kombinatorischer und sequentieller Logik. Beim RS-Latch entsteht die Speicherwirkung durch Rueckkopplung. Das D-Latch erweitert dieses Prinzip um einen Dateneingang und einen Takteingang, bleibt aber waehrend des aktiven Taktpegels transparent. Das D-Flipflop reduziert diese Transparenz auf eine Taktflanke und eignet sich deshalb besser als Registerelement in synchronen Schaltungen.</p>
+<p></p>
+<p>Das T-Flipflop zeigte anschaulich, wie durch Rueckkopplung ein toggelndes Verhalten entsteht. Da der Zustand bei jeder Taktflanke wechselt, halbiert sich die Frequenz am Ausgang.</p>
+<p></p>
+<p>Der mod-5-Zaehler verband drei D-Flipflops mit einer kombinatorischen Uebergangslogik. Da alle Flipflops denselben Takt erhielten, arbeitete die Schaltung synchron. Die beobachtete Folge 000 -&gt; 001 -&gt; 010 -&gt; 011 -&gt; 100 -&gt; 000 bestaetigte die korrekte Funktion. Die Betrachtung der ungenutzten Zustaende zeigte ausserdem, dass die Schaltung nach einem Fehlerzustand wieder in den regulaeren Zaehlzyklus zurueckfinden kann.</p>
+<p></p>
+<h2>7 Fehlerbetrachtung</h2>
+<p></p>
+<p>Moegliche Fehlerquellen bei diesem Versuch waren:</p>
+<p></p>
+<p>1. Floating-Pegel an Tastereingaengen, falls Pull-Up- oder Pull-Down-Widerstaende fehlen.</p>
+<p>2. Vertauschte aktive Pegel beim NAND-RS-Latch, da die Eingaenge aktiv-low arbeiten.</p>
+<p>3. Kontaktprobleme auf dem Steckbrett oder lose Jumper-Leitungen.</p>
+<p>4. Fehlende Vorwiderstaende an LEDs, die Bauteile beschaedigen koennten.</p>
+<p>5. Falsche Taktflanke bei der Interpretation des D-Flipflops.</p>
+<p>6. Nicht beschaltete Eingaenge der D-Flipflops, die zu undefinierten Zustaenden fuehren koennen.</p>
+<p>7. Fehler in der Uebergangslogik des mod-5-Zaehlers, die zu falschen oder nicht selbstkorrigierenden Zustaenden fuehren wuerden.</p>
+<p></p>
+<h2>8 Fazit</h2>
+<p></p>
+<p>Die untersuchten Speicherelemente konnten erfolgreich aufgebaut und in ihrer Funktion verglichen werden. Das RS-Latch zeigte die grundlegende Speicherwirkung durch Rueckkopplung, besitzt aber eine verbotene Eingangskombination. Das D-Latch loest dieses Problem, ist jedoch waehrend des aktiven Taktpegels transparent. Das D-Flipflop uebernimmt Daten nur an der steigenden Taktflanke und eignet sich dadurch als stabiles Registerelement. Das T-Flipflop zeigte das Umschalten bei jeder Taktflanke und damit die Frequenzteilung durch zwei.</p>
+<p></p>
+<p>Der synchrone mod-5-Zaehler durchlief die erwartete Folge 000 -&gt; 001 -&gt; 010 -&gt; 011 -&gt; 100 -&gt; 000. Die gemeinsame Taktung aller Flipflops sorgte fuer geordnete Zustandswechsel. Insgesamt verdeutlichte der Versuch den Uebergang von einfachen Speicherelementen zu synchronen Schaltwerken.</p>
+</body></html>
