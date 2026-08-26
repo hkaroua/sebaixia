@@ -1,0 +1,605 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2680 >>
+stream
+BT
+/F1 10 Tf
+45 800 Td
+14 TL
+(VERSUCHSPROTOKOLL VERSUCH 1 - GATTEREIGENSCHAFTEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Praktikum: Digitaltechnik) Tj
+T*
+(Versuch: 1 - Gattereigenschaften) Tj
+T*
+(Name: Precious Adaugo Nnamaka) Tj
+T*
+(Betreuer: Prof. Dr.-Ing. Peter Zipf) Tj
+T*
+() Tj
+T*
+(1 Ziel des Versuchs) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Ziel des ersten Versuchs war es, grundlegende Eigenschaften digitaler Logikgatter) Tj
+T*
+(messtechnisch zu untersuchen. Im Mittelpunkt standen der 74LS04-Inverter und ein) Tj
+T*
+(Ringoszillator. Beim Inverter wurden das Verhalten bei PWM-Ansteuerung, die) Tj
+T*
+(Uebertragungskennlinie sowie die daraus ableitbaren Kenngroessen betrachtet. Beim) Tj
+T*
+(Ringoszillator wurden die Abhaengigkeit der Schwingfrequenz von der) Tj
+T*
+(Versorgungsspannung und die daraus berechnete effektive Verlustleistungskapazitaet) Tj
+T*
+(untersucht.) Tj
+T*
+() Tj
+T*
+(2 Verwendete Bauteile und Messgeraete) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(| Bauteil / Geraet | Verwendung |) Tj
+T*
+(| --- | --- |) Tj
+T*
+(| Arduino Uno | Erzeugung eines PWM-Signals |) Tj
+T*
+(| Potentiometer | Einstellung des Duty-Cycles |) Tj
+T*
+(| LED mit 220-Ohm-Vorwiderstand | Funktionskontrolle des PWM-Signals |) Tj
+T*
+(| 74LS04 | Inverter und Ringoszillator |) Tj
+T*
+(| Operationsverstaerker | aktiver Tiefpass bzw. Spannungsfolger |) Tj
+T*
+(| Widerstand 2 kOhm | Tiefpassfilter 1. Ordnung |) Tj
+T*
+(| Kondensator 10 uF | Tiefpassfilter 1. Ordnung |) Tj
+T*
+(| Steckbrett und Leitungen | Aufbau der Schaltungen |) Tj
+T*
+(| Labornetzteil | einstellbare Versorgungsspannung |) Tj
+T*
+(| Digitalmultimeter | Messung von Spannungen und Stromaufnahme |) Tj
+T*
+(| USB-Logic-Analyzer | Aufnahme schneller Digitalsignale |) Tj
+T*
+() Tj
+T*
+(3 Theoretische Grundlagen) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Ein Inverter bildet die logische NOT-Funktion ab. Bei einem niedrigen) Tj
+T*
+(Eingangspegel wird der Ausgang auf HIGH gezogen, bei einem hohen Eingangspegel) Tj
+T*
+(liegt der Ausgang auf LOW. Die Uebertragungskennlinie Vo = f\(Vi\) beschreibt den) Tj
+T*
+(analogen Zusammenhang zwischen Eingangs- und Ausgangsspannung. Aus ihr lassen) Tj
+T*
+(sich unter anderem die Ausgangspegel VoH und VoL, die Umschaltspannung VS) Tj
+T*
+(sowie Stoersicherheiten ableiten.) Tj
+T*
+() Tj
+T*
+(Ein Ringoszillator besteht aus einer ungeraden Anzahl hintereinandergeschalteter) Tj
+T*
+(Inverter, wobei der Ausgang des letzten Inverters auf den Eingang des ersten) Tj
+T*
+(zurueckgefuehrt wird. Da die Rueckkopplung invertierend ist und jedes Gatter eine) Tj
+T*
+(endliche Laufzeit besitzt, entsteht eine periodische Schwingung. Mit abnehmender) Tj
+T*
+(Versorgungsspannung werden die Schaltvorgaenge langsamer, sodass die) Tj
+T*
+(Schwingfrequenz sinkt.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 2869 >>
+stream
+BT
+/F1 10 Tf
+45 800 Td
+14 TL
+() Tj
+T*
+(Fuer die Auswertung der Verlustleistungskapazitaet wurde die vereinfachte) Tj
+T*
+(Beziehung) Tj
+T*
+() Tj
+T*
+(Cpd1 = I_CC / \(N * V_CC * f0\)) Tj
+T*
+() Tj
+T*
+(verwendet. Dabei ist N die Anzahl der verwendeten Inverter, I_CC die) Tj
+T*
+(gemessene Gesamtstromaufnahme, V_CC die Versorgungsspannung und f0 die) Tj
+T*
+(Schwingfrequenz. Da im Aufbau drei Inverter verwendet wurden, gilt hier N = 3.) Tj
+T*
+() Tj
+T*
+(4 Versuchsdurchfuehrung) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(4.1 PWM-Erzeugung und Untersuchung des Inverters) Tj
+T*
+() Tj
+T*
+(Das Potentiometer wurde als Spannungsteiler zwischen 5 V und GND angeschlossen.) Tj
+T*
+(Der Schleifer war mit dem Analogeingang A0 des Arduino verbunden. Der Arduino) Tj
+T*
+(las den Analogwert ein, bildete ihn auf den Wertebereich 0 bis 255 ab und gab das) Tj
+T*
+(entsprechende PWM-Signal an Pin 9 aus. Zunaechst wurde die Funktion mit einer) Tj
+T*
+(LED und einem 220-Ohm-Vorwiderstand ueberprueft. Durch Drehen des Potentiometers) Tj
+T*
+(aenderte sich die Helligkeit der LED, wodurch die Veraenderung des Duty-Cycles) Tj
+T*
+(sichtbar wurde.) Tj
+T*
+() Tj
+T*
+(Anschliessend wurde das PWM-Signal auf den Eingang eines 74LS04-Inverters) Tj
+T*
+(gelegt. Eingang und Ausgang wurden mit dem USB-Logic-Analyzer aufgenommen. Bei) Tj
+T*
+(der Messung war zu erkennen, dass das Ausgangssignal gegenueber dem Eingang) Tj
+T*
+(invertiert ist. Eine Veraenderung des Potentiometers veraenderte die Pulsbreite,) Tj
+T*
+(nicht jedoch die grundsaetzliche Inverterfunktion. Die genaue Bestimmung der) Tj
+T*
+(Gatterlaufzeit ist mit dem verwendeten Aufbau nur begrenzt moeglich, weil die) Tj
+T*
+(Messung durch Abtastrate, Leitungslaengen und die Belastung des Logic-Analyzers) Tj
+T*
+(beeinflusst wird.) Tj
+T*
+() Tj
+T*
+(Im naechsten Schritt wurde das PWM-Signal mit einem aktiven Tiefpass 1. Ordnung) Tj
+T*
+(gefiltert. Der Operationsverstaerker wurde als Spannungsfolger bzw. Puffer) Tj
+T*
+(verwendet. Dadurch entstand aus dem PWM-Signal eine einstellbare Gleichspannung,) Tj
+T*
+(die als Eingangsspannung fuer die Kennlinienmessung des Inverters diente. Die) Tj
+T*
+(Ein- und Ausgangsspannungen wurden mit dem Multimeter gemessen.) Tj
+T*
+() Tj
+T*
+(Abbildung 1: PWM-Aufbau mit Arduino Uno, Potentiometer und LED.) Tj
+T*
+(Abbildung 2: Aufbau mit Tiefpass und Operationsverstaerker.) Tj
+T*
+(Abbildung 3: Zeitlicher Signalverlauf vor und nach dem Inverter mit dem) Tj
+T*
+(USB-Logic-Analyzer.) Tj
+T*
+() Tj
+T*
+(4.2 Messung der Uebertragungskennlinie) Tj
+T*
+() Tj
+T*
+(Die Eingangsspannung wurde zunaechst ueber den gesamten Bereich von 0 V bis) Tj
+T*
+(etwa 5 V variiert. Im Umschaltbereich wurde die Spannung feiner veraendert. Die) Tj
+T*
+(aus der handschriftlichen Messliste eindeutig lesbaren Werte sind in Tabelle 1) Tj
+T*
+(zusammengefasst.) Tj
+T*
+() Tj
+T*
+(| Eingangsspannung Vi | Ausgangsspannung Vo |) Tj
+T*
+(| ---: | ---: |) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2195 >>
+stream
+BT
+/F1 10 Tf
+45 800 Td
+14 TL
+(| 0,0 V | 4,54 V |) Tj
+T*
+(| 0,5 V | 4,47 V |) Tj
+T*
+(| 1,0 V | 3,82 V |) Tj
+T*
+(| 1,5 V | 0,156 V |) Tj
+T*
+(| 2,0 V | 0,159 V |) Tj
+T*
+(| 2,5 V | ca. 0,150 V |) Tj
+T*
+(| 3,0 V | ca. 0,10 V |) Tj
+T*
+() Tj
+T*
+(Tabelle 1: Messwerte der Uebertragungskennlinie des 74LS04-Inverters.) Tj
+T*
+() Tj
+T*
+(Die Messwerte zeigen den erwarteten invertierenden Verlauf. Bei kleinen) Tj
+T*
+(Eingangsspannungen befindet sich der Ausgang im HIGH-Zustand. Zwischen etwa) Tj
+T*
+(1,0 V und 1,5 V faellt die Ausgangsspannung sehr steil ab. Oberhalb dieses) Tj
+T*
+(Bereichs liegt der Ausgang stabil im LOW-Zustand.) Tj
+T*
+() Tj
+T*
+(Aus den vorhandenen Messpunkten kann die Umschaltspannung naeherungsweise durch) Tj
+T*
+(lineare Interpolation zwischen 1,0 V und 1,5 V bestimmt werden. Dabei ergibt sich) Tj
+T*
+(fuer den Schnittpunkt Vo = Vi:) Tj
+T*
+() Tj
+T*
+(VS ca. 1,34 V) Tj
+T*
+() Tj
+T*
+(Damit lassen sich folgende Naeherungswerte angeben:) Tj
+T*
+() Tj
+T*
+(| Kenngroesse | Wert / Einschaetzung |) Tj
+T*
+(| --- | ---: |) Tj
+T*
+(| VoH | ca. 4,54 V |) Tj
+T*
+(| VoL | ca. 0,15 V |) Tj
+T*
+(| VS | ca. 1,34 V |) Tj
+T*
+(| ViLmax | aus den Messwerten nicht exakt bestimmbar |) Tj
+T*
+(| ViHmin | aus den Messwerten nicht exakt bestimmbar |) Tj
+T*
+(| VoLmax | ca. 0,159 V aus den Messwerten |) Tj
+T*
+(| VoHmin | ca. 3,82 V aus den Messwerten im Uebergangsbereich |) Tj
+T*
+() Tj
+T*
+(Die Punkte ViLmax und ViHmin waeren streng genommen dort zu bestimmen, wo die) Tj
+T*
+(Kennlinie die Steigung -1 besitzt. Dafuer waeren im Uebergangsbereich mehr) Tj
+T*
+(Messwerte mit kleineren Spannungsschritten erforderlich. Die vorhandene) Tj
+T*
+(Messreihe erlaubt daher nur eine qualitative bzw. naeherungsweise Auswertung.) Tj
+T*
+() Tj
+T*
+(Fuer die typische statische Stoersicherheit ergeben sich mit den gemessenen) Tj
+T*
+(Pegelwerten:) Tj
+T*
+() Tj
+T*
+(VnLstat = VS - VoL = 1,34 V - 0,15 V = 1,19 V) Tj
+T*
+(VnHstat = VoH - VS = 4,54 V - 1,34 V = 3,20 V) Tj
+T*
+() Tj
+T*
+(Fuer eine konservative Worst-Case-Betrachtung koennen die typischen) Tj
+T*
+(TTL-Grenzwerte des 74LS04 herangezogen werden:) Tj
+T*
+() Tj
+T*
+(ViLmax = 0,8 V) Tj
+T*
+(ViHmin = 2,0 V) Tj
+T*
+(VoLmax = 0,5 V) Tj
+T*
+(VoHmin = 2,7 V) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 2834 >>
+stream
+BT
+/F1 10 Tf
+45 800 Td
+14 TL
+(Daraus folgt:) Tj
+T*
+() Tj
+T*
+(VnL = ViLmax - VoLmax = 0,8 V - 0,5 V = 0,3 V) Tj
+T*
+(VnH = VoHmin - ViHmin = 2,7 V - 2,0 V = 0,7 V) Tj
+T*
+() Tj
+T*
+(Die gemessene Kennlinie bestaetigt somit die NOT-Funktion des Inverters. Der) Tj
+T*
+(Umschaltbereich liegt deutlich unterhalb der halben Betriebsspannung, was fuer) Tj
+T*
+(TTL-Logik typisch ist.) Tj
+T*
+() Tj
+T*
+(4.3 Ringoszillator) Tj
+T*
+() Tj
+T*
+(Der Ringoszillator wurde abweichend von der Versuchsanleitung nicht mit elf,) Tj
+T*
+(sondern mit drei Invertern aufgebaut. Diese Abweichung ist funktional zulaessig,) Tj
+T*
+(weil auch drei Inverter eine ungerade Anzahl bilden. Der Ausgang des dritten) Tj
+T*
+(Inverters wurde auf den Eingang des ersten Inverters zurueckgefuehrt. Aufgrund) Tj
+T*
+(der geringeren Anzahl an Gattern ist gegenueber einem Aufbau mit elf Invertern) Tj
+T*
+(eine hoehere Schwingfrequenz zu erwarten.) Tj
+T*
+() Tj
+T*
+(Die Versorgungsspannung wurde nacheinander auf 5 V, 4 V, 3 V und 2,5 V) Tj
+T*
+(eingestellt. Fuer jede Spannung wurden die Gesamtstromaufnahme und die) Tj
+T*
+(Schwingfrequenz gemessen. Die Frequenz wurde mit dem USB-Logic-Analyzer) Tj
+T*
+(bestimmt.) Tj
+T*
+() Tj
+T*
+(Abbildung 4: Ringoszillator mit drei Invertern und Labornetzteil.) Tj
+T*
+() Tj
+T*
+(| VCC | ICC | f0 | Pges = VCC * ICC | P je Inverter | Cpd1 |) Tj
+T*
+(| ---: | ---: | ---: | ---: | ---: | ---: |) Tj
+T*
+(| 5,0 V | 4 mA | 18,60 MHz | 20,0 mW | 6,67 mW | 14,34 pF |) Tj
+T*
+(| 4,0 V | 14 mA | 16,00 MHz | 56,0 mW | 18,67 mW | 72,92 pF |) Tj
+T*
+(| 3,0 V | 17 mA | 10,41 MHz | 51,0 mW | 17,00 mW | 181,45 pF |) Tj
+T*
+(| 2,5 V | 19 mA | 4,90 MHz | 47,5 mW | 15,83 mW | 517,01 pF |) Tj
+T*
+() Tj
+T*
+(Tabelle 2: Verlustleistung und berechnete effektive Verlustleistungskapazitaet) Tj
+T*
+(bei N = 3.) Tj
+T*
+() Tj
+T*
+(Die Messwerte zeigen, dass die Schwingfrequenz mit sinkender Versorgungsspannung) Tj
+T*
+(deutlich abnimmt. Das entspricht der Erwartung, da die Schaltvorgaenge bei) Tj
+T*
+(geringerer Versorgungsspannung langsamer werden. Auffaellig ist, dass die) Tj
+T*
+(berechnete Kapazitaet Cpd1 stark ansteigt. Als reine interne Bauteilkenngroesse) Tj
+T*
+(sollte sie jedoch nicht in diesem Ausmass von der Versorgungsspannung abhaengen.) Tj
+T*
+() Tj
+T*
+(Die starke Streuung der berechneten Werte zeigt daher, dass Cpd1 hier eher als) Tj
+T*
+(effektive Ersatzgroesse zu verstehen ist. Moegliche Ursachen sind:) Tj
+T*
+() Tj
+T*
+(- Belastung durch den USB-Logic-Analyzer,) Tj
+T*
+(- zusaetzliche Kapazitaeten durch Steckbrett und Leitungen,) Tj
+T*
+(- Messunsicherheiten bei Strom und Frequenz,) Tj
+T*
+(- statische Stromanteile, die in der vereinfachten Formel der dynamischen) Tj
+T*
+(  Verlustleistung zugerechnet werden,) Tj
+T*
+(- die Verwendung eines realen 74LS04, dessen Verhalten nicht ideal dem) Tj
+T*
+(  vereinfachten CMOS-Modell entspricht.) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2867 >>
+stream
+BT
+/F1 10 Tf
+45 800 Td
+14 TL
+(Besonders bei 2,5 V ist die gemessene Frequenz klein. Da f0 im Nenner der) Tj
+T*
+(Formel steht, fuehrt dies zu einem besonders grossen berechneten Wert fuer) Tj
+T*
+(Cpd1. Aussagekraeftiger waeren wiederholte Messungen, kuerzere Leitungen, eine) Tj
+T*
+(moeglichst geringe Messbelastung und das Abziehen eines separat bestimmten) Tj
+T*
+(Ruhestroms.) Tj
+T*
+() Tj
+T*
+(5 Fehlerbetrachtung) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Die Genauigkeit der Ergebnisse wird durch mehrere praktische Einfluesse begrenzt:) Tj
+T*
+() Tj
+T*
+(1. Die Kennlinie des Inverters wurde nur mit wenigen eindeutig lesbaren) Tj
+T*
+(   Messpunkten dokumentiert. Deshalb lassen sich ViLmax und ViHmin nicht) Tj
+T*
+(   exakt aus der Messkurve bestimmen.) Tj
+T*
+(2. Im Umschaltbereich aendert sich die Ausgangsspannung sehr stark. Schon kleine) Tj
+T*
+(   Abweichungen der Eingangsspannung fuehren dort zu grossen Aenderungen am) Tj
+T*
+(   Ausgang.) Tj
+T*
+(3. Der USB-Logic-Analyzer und die Messleitungen belasten schnelle Signale und) Tj
+T*
+(   koennen die gemessene Frequenz beeinflussen.) Tj
+T*
+(4. Steckbrettkontakte, lange Leitungen und parasitaere Kapazitaeten wirken sich) Tj
+T*
+(   besonders beim Ringoszillator aus.) Tj
+T*
+(5. Die Berechnung von Cpd1 beruht auf einem vereinfachten Modell. Nicht alle) Tj
+T*
+(   gemessenen Stromanteile sind rein dynamisch.) Tj
+T*
+() Tj
+T*
+(6 Fazit) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Der Versuch bestaetigte die grundlegende Funktion des 74LS04-Inverters. Die) Tj
+T*
+(gemessene Uebertragungskennlinie zeigt klar den invertierenden Verlauf: Bei) Tj
+T*
+(kleiner Eingangsspannung liegt der Ausgang auf HIGH, bei groesserer) Tj
+T*
+(Eingangsspannung auf LOW. Der Umschaltbereich befindet sich zwischen etwa 1,0 V) Tj
+T*
+(und 1,5 V; die naeherungsweise bestimmte Umschaltspannung betraegt ca. 1,34 V.) Tj
+T*
+() Tj
+T*
+(Der Ringoszillator funktionierte mit drei Invertern, da die Anzahl der Inverter) Tj
+T*
+(ungerade war. Mit sinkender Versorgungsspannung nahm die Schwingfrequenz) Tj
+T*
+(deutlich ab. Die berechneten Werte fuer Cpd1 streuen stark und sind daher nicht) Tj
+T*
+(als konstante Bauteilparameter, sondern als durch Messaufbau und Modellannahmen) Tj
+T*
+(beeinflusste Ersatzwerte zu interpretieren. Insgesamt zeigen die Messergebnisse) Tj
+T*
+(den Zusammenhang zwischen Pegelverhalten, Laufzeit, Versorgungsspannung und) Tj
+T*
+(Verlustleistung digitaler Gatter.) Tj
+T*
+() Tj
+T*
+(7 Erklaerung zur Nutzung digitaler Hilfsmittel) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Dieses ueberarbeitete Protokoll wurde sprachlich und strukturell mit) Tj
+T*
+(KI-Unterstuetzung optimiert. Die Messwerte, Beobachtungen und der durchgefuehrte) Tj
+T*
+(Laboraufbau stammen aus der eigenen Versuchsdurchfuehrung. Inhaltliche) Tj
+T*
+(Ergaenzungen wurden nur zur klareren Auswertung, zur Fehlerbetrachtung und zur) Tj
+T*
+(fachlichen Einordnung der vorhandenen Messdaten vorgenommen.) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R 9 0 R 11 0 R ] /Count 5 >>
+endobj
+13 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002811 00000 n 
+0000002938 00000 n 
+0000005859 00000 n 
+0000005986 00000 n 
+0000008233 00000 n 
+0000008360 00000 n 
+0000011246 00000 n 
+0000011373 00000 n 
+0000014293 00000 n 
+0000014422 00000 n 
+0000014507 00000 n 
+trailer
+<< /Size 14 /Root 13 0 R >>
+startxref
+14558
+%%EOF
