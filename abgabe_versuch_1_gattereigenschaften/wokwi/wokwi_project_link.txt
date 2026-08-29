@@ -1,0 +1,13 @@
+Wokwi-Projektlink:
+https://wokwi.com/projects/466178284645671937
+
+Hinweis:
+Das Projekt wurde anonym gespeichert und enthaelt Arduino Uno, Potentiometer und
+LED. Die fertigen Projektdateien liegen zusaetzlich in diesem Ordner:
+
+- sketch.ino
+- diagram.json
+
+Simulation:
+Den Link oeffnen und auf Start klicken. Das Potentiometer veraendert den
+Duty-Cycle, die LED zeigt die PWM-Ausgabe auf Pin 9.

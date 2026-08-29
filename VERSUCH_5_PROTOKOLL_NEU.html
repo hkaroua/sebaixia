@@ -1,0 +1,172 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Versuch 5 Protokoll</title><style>body{font-family:Arial,sans-serif;max-width:900px;margin:32px auto;line-height:1.45}h1{font-size:24px}h2{font-size:20px}</style></head><body>
+<h1>Versuchsprotokoll Versuch 5 - VHDL / FPGA</h1>
+<p></p>
+<p>Praktikum: Digitaltechnik</p>
+<p>Versuch: 5 - VHDL / FPGA</p>
+<p>Name: Precious Adaugo Nnamaka</p>
+<p>Betreuer: Prof. Dr.-Ing. Peter Zipf</p>
+<p></p>
+<h2>1 Ziel des Versuchs</h2>
+<p></p>
+<p>Ziel des fünften Versuchs war der Übergang von einer grafisch entwickelten Digitalschaltung zu einer Hardwarebeschreibung in VHDL und deren Umsetzung auf einem FPGA. Dazu wurde zunächst ein 4-Bit-zu-7-Segment-Decoder in Digital entworfen und geprüft. Anschließend wurde die Schaltung als VHDL beschrieben, in Vivado simuliert, synthetisiert und auf ein Digilent PYNQ-Z1-Board mit dem FPGA XC7Z020 übertragen.</p>
+<p></p>
+<p>Als zweiter Teil wurde ein synchroner Notengenerator betrachtet. Dieser erzeugt aus einem Eingangswert einen sechs Bit breiten Notenwert und zeigt damit den Unterschied zwischen rein kombinatorischen und zustandsbehafteten synchronen Schaltungen.</p>
+<p></p>
+<h2>2 Verwendete Werkzeuge und Dateien</h2>
+<p></p>
+<p>Werkzeug / Datei | Verwendung</p>
+<p>Digital | Grafischer Entwurf und Simulation der Logikschaltungen</p>
+<p>trial.dig | 4-Bit-zu-7-Segment-Decoder in Digital</p>
+<p>trial.vhdl | Aus Digital exportierte VHDL-Beschreibung</p>
+<p>Vivado | Simulation, Synthese, Implementation und Bitstream-Erzeugung</p>
+<p>Testbench | Automatische Überprüfung der Eingangskombinationen</p>
+<p>XDC-Datei | Zuordnung der Signale zu den FPGA-Pins</p>
+<p>PYNQ-Z1 / XC7Z020 | Zielhardware für die FPGA-Umsetzung</p>
+<p>Notengenerator.dig | Synchroner 6-Bit-Notengenerator</p>
+<p>Audio-Projekt | Einbindung des Notengenerators in die Audioausgabe</p>
+<p></p>
+<h2>3 Theoretische Grundlagen</h2>
+<p></p>
+<p>VHDL beschreibt keine nacheinander ausgeführte Software, sondern digitale Hardware. Die Beschreibung legt fest, welche logischen Verknüpfungen, Register und Signalpfade im FPGA realisiert werden. Eine VHDL-Datei besteht typischerweise aus einer Entity und einer Architecture. Die Entity beschreibt die Ein- und Ausgänge einer Schaltung. Die Architecture beschreibt das Verhalten oder die Struktur der Schaltung.</p>
+<p></p>
+<p>Wichtige VHDL-Bestandteile sind:</p>
+<p></p>
+<p>Bestandteil | Bedeutung</p>
+<p>library IEEE / STD_LOGIC_1164 | Einbindung digitaler Logikdatentypen</p>
+<p>entity | Definition der Ein- und Ausgänge</p>
+<p>architecture | Beschreibung der Schaltungslogik</p>
+<p>STD_LOGIC | Datentyp für einzelne digitale Signale</p>
+<p>STD_LOGIC_VECTOR | Datentyp für mehrbitige Signale und Busse</p>
+<p>Testbench | Simulation der Schaltung ohne reale Hardware</p>
+<p>XDC-Datei | Verbindung zwischen VHDL-Signalen und FPGA-Pins</p>
+<p></p>
+<p>Ein FPGA arbeitet parallel. Mehrere Signalzuweisungen werden daher nicht nacheinander wie in einem normalen Programm ausgeführt, sondern als gleichzeitig vorhandene Hardwarestrukturen umgesetzt.</p>
+<p></p>
+<h2>4 4-Bit-zu-7-Segment-Decoder</h2>
+<p></p>
+<p>4.1 Entwurf in Digital</p>
+<p></p>
+<p>Der 7-Segment-Decoder besitzt vier Eingänge X0 bis X3. Diese vier Eingänge stellen eine Binärzahl dar. Die sieben Ausgänge a bis g steuern die einzelnen Segmente der Anzeige. Für jede Dezimalziffer von 0 bis 9 muss eine passende Kombination der Segmente aktiviert werden.</p>
+<p></p>
+<p>Die Schaltung besitzt keinen Speicher und keinen Takt. Die Ausgänge hängen ausschließlich von der aktuell anliegenden Eingangskombination ab. Der Decoder ist daher ein Schaltnetz beziehungsweise eine kombinatorische Schaltung.</p>
+<p></p>
+<p>In Digital wurde die Schaltung mit Schaltern an den Eingängen und einer Sieben-Segment-Anzeige an den Ausgängen geprüft. Für die Dezimalziffern 0 bis 9 wurde kontrolliert, ob die richtige Anzeige erscheint.</p>
+<p></p>
+<p>Überprüfung:</p>
+<p></p>
+<p>Binärwert | Dezimalziffer | Ergebnis</p>
+<h2>0000 | 0 | korrekt</h2>
+<h2>0001 | 1 | korrekt</h2>
+<h2>0010 | 2 | korrekt</h2>
+<h2>0011 | 3 | korrekt</h2>
+<h2>0100 | 4 | korrekt</h2>
+<h2>0101 | 5 | korrekt</h2>
+<h2>0110 | 6 | korrekt</h2>
+<h2>0111 | 7 | korrekt</h2>
+<h2>1000 | 8 | korrekt</h2>
+<h2>1001 | 9 | korrekt</h2>
+<p></p>
+<p>Die Simulation in Digital bestätigte die korrekte Funktion des Decoders. Der gespeicherte Entwurf trial.dig dokumentiert die grafische Schaltung.</p>
+<p></p>
+<p>4.2 Export nach VHDL</p>
+<p></p>
+<p>Nach der erfolgreichen Simulation wurde die Schaltung aus Digital nach VHDL exportiert. Die erzeugte Datei trial.vhdl enthält die logischen Gleichungen für die Segmentausgänge. Ein Beispiel aus der exportierten Beschreibung ist:</p>
+<p></p>
+<p>c &lt;= X0 OR NOT X1 OR X2</p>
+<p></p>
+<p>Diese Zuweisung zeigt, dass VHDL die boolesche Funktion des Ausgangs c direkt beschreibt. Entsprechend werden auch die anderen Segmentausgänge a, b, d, e, f und g durch logische Verknüpfungen erzeugt.</p>
+<p></p>
+<h2>5 Umsetzung in Vivado</h2>
+<p></p>
+<p>Die Arbeit mit Vivado war ein zentraler Bestandteil des Versuchs. Im Unterschied zur grafischen Simulation in Digital mussten mehrere Dateien korrekt zusammenpassen: die VHDL-Quelle, die Testbench, die XDC-Pinbelegung und das gewählte FPGA-Zielgerät.</p>
+<p></p>
+<p>Der rekonstruierte Arbeitsablauf war:</p>
+<p></p>
+<p>1. Vivado öffnen und ein neues RTL-Projekt anlegen.</p>
+<p>2. VHDL als Zielsprache auswählen.</p>
+<p>3. Das Board PYNQ-Z1 beziehungsweise den FPGA XC7Z020 als Zielhardware auswählen.</p>
+<p>4. Die VHDL-Designquelle hinzufügen.</p>
+<p>5. Eine Testbench hinzufügen, die verschiedene Eingangskombinationen vorgibt.</p>
+<p>6. Die XDC-Datei einbinden und die Eingänge sowie Segmentausgänge den realen Pins zuordnen.</p>
+<p>7. Die Behavioral Simulation starten und die Ausgangssignale prüfen.</p>
+<p>8. Synthese ausführen.</p>
+<p>9. Implementation ausführen.</p>
+<p>10. Bitstream erzeugen.</p>
+<p>11. Das PYNQ-Z1 über USB verbinden.</p>
+<p>12. Im Hardware Manager das Zielgerät verbinden und programmieren.</p>
+<p>13. Die Funktion auf der realen Sieben-Segment-Anzeige überprüfen.</p>
+<p></p>
+<p>Besonders wichtig war, dass die Portnamen in der VHDL-Entity mit den Namen in der XDC-Datei übereinstimmen. Bereits kleine Abweichungen bei Signalnamen oder Pinzuordnungen konnten zu Fehlern bei Simulation, Synthese oder Programmierung führen.</p>
+<p></p>
+<h2>6 Testbench und Pinbelegung</h2>
+<p></p>
+<p>Die Testbench legte nacheinander verschiedene Binärwerte an die Eingänge an. Zwischen den Testwerten wurde jeweils eine Wartezeit verwendet, zum Beispiel 100 ns. Dadurch konnte in der Simulation überprüft werden, ob die Segmentausgänge für jede Eingangskombination korrekt reagieren.</p>
+<p></p>
+<p>Die XDC-Datei ordnete die Eingangssignale den Tastern beziehungsweise Schaltern des Boards zu. Die Ausgänge a bis g wurden den Pins der Sieben-Segment-Anzeige beziehungsweise der Pmod-Schnittstelle zugeordnet. Außerdem musste der passende elektrische Standard, zum Beispiel LVCMOS33, gesetzt werden.</p>
+<p></p>
+<h2>7 Durchführung und Ergebnisse</h2>
+<p></p>
+<p>Nach erfolgreicher Simulation wurden Synthese und Implementation durchgeführt. Anschließend wurde der Bitstream erzeugt und auf das PYNQ-Z1 übertragen. Das Board wurde im Hardware Manager erkannt und konnte programmiert werden.</p>
+<p></p>
+<p>Durch Betätigen der Eingangstaster beziehungsweise durch Anlegen der Eingangskombinationen änderte sich der Binärwert. Die zugehörige Dezimalziffer wurde auf der angeschlossenen Sieben-Segment-Anzeige dargestellt. Damit wurde die vorher in Digital und in der Testbench geprüfte Funktion auch auf realer Hardware bestätigt.</p>
+<p></p>
+<p>Die vollständige Entwurfskette wurde damit erfolgreich durchlaufen:</p>
+<p></p>
+<p>Wahrheitstabelle -&gt; Gatternetz -&gt; VHDL -&gt; Simulation -&gt; Synthese -&gt; Implementation -&gt; Bitstream -&gt; FPGA-Test</p>
+<p></p>
+<h2>8 Notengenerator</h2>
+<p></p>
+<p>Im zweiten Teil wurde der Entwurf Notengenerator.dig betrachtet. Dieser besitzt einen vier Bit breiten Eingang btn_i und einen sechs Bit breiten Ausgang note_o. Der Eingangswert wird über kombinatorische Auswahlpfade verarbeitet. Zusätzlich enthält die Schaltung ein Register, sodass ein Zustand gespeichert werden kann.</p>
+<p></p>
+<p>Die wichtigsten Bestandteile des Notengenerators waren:</p>
+<p></p>
+<p>Baustein | Funktion</p>
+<p>btn_i[3:0] | Auswahl beziehungsweise Steuerung der Note</p>
+<p>Multiplexer | Auswahl zwischen Eingangswert, Rückführung und Resetpfad</p>
+<p>Addierer | Bildung des nächsten Notenwertes</p>
+<p>Register | Speicherung von note_o am Takt</p>
+<p>reset_i | synchrones Zurücksetzen auf 0</p>
+<p>note_o[5:0] | Notencode für die nachfolgende Tonerzeugung</p>
+<p></p>
+<p>Im Gegensatz zum 7-Segment-Decoder handelt es sich beim Notengenerator nicht um ein reines Schaltnetz. Durch das Register ist die Schaltung zustandsbehaftet und synchron. Der Ausgang note_o hängt daher nicht nur vom aktuellen Eingang ab, sondern auch vom gespeicherten Zustand.</p>
+<p></p>
+<h2>9 Einbindung in die Audioausgabe</h2>
+<p></p>
+<p>Der Notengenerator wurde in ein Audio-Projekt eingebunden. Dieses enthielt unter anderem folgende Module:</p>
+<p></p>
+<p>Modul | Aufgabe</p>
+<p>Clock_Divider | Erzeugung langsamerer Arbeits- und Notentakte aus dem FPGA-Takt</p>
+<p>Reset_module | Verwaltung des Reset-Signals</p>
+<p>vol_ctrl | Steuerung der Lautstärke</p>
+<p>PWM_Modulator | Erzeugung des digitalen Audiosignals</p>
+<p>Audio_Sequence_Player | Abspielen der Notenfolge</p>
+<p></p>
+<p>Aus dem Notencode wurde eine passende Tonfrequenz abgeleitet. Der PWM-Modulator erzeugte daraus ein digitales Audiosignal, das anschließend über die Audio-Pins des Boards ausgegeben wurde.</p>
+<p></p>
+<h2>10 Auswertung</h2>
+<p></p>
+<p>Der Versuch verdeutlichte den Unterschied zwischen grafischer Logiksimulation und realer FPGA-Umsetzung. In Digital konnte die Schaltung anschaulich aufgebaut und direkt getestet werden. In Vivado mussten dagegen VHDL-Code, Testbench, Pinbelegung und Zielhardware korrekt zusammenarbeiten.</p>
+<p></p>
+<p>Der 7-Segment-Decoder zeigte eine rein kombinatorische Funktion. Eine Änderung der Eingänge wirkte sich direkt auf die Ausgänge aus, ohne dass ein Takt oder Speicher beteiligt war. Die erfolgreiche Hardwareprüfung bestätigte, dass die aus Digital exportierte Logik korrekt auf dem FPGA umgesetzt wurde.</p>
+<p></p>
+<p>Der Notengenerator zeigte dagegen eine synchrone, zustandsbehaftete Schaltung. Durch das Register blieb ein Notenwert gespeichert und wurde nur taktabhängig verändert. Dadurch kann der Kern des Notengenerators als Moore-ähnlicher Automat betrachtet werden, da der Ausgang aus dem gespeicherten Zustand hervorgeht.</p>
+<p></p>
+<h2>11 Fehlerbetrachtung</h2>
+<p></p>
+<p>Mögliche Fehlerquellen bei diesem Versuch waren:</p>
+<p></p>
+<p>1. Falsche oder abweichende Portnamen zwischen VHDL-Datei und XDC-Datei.</p>
+<p>2. Nicht korrekt zugeordnete FPGA-Pins.</p>
+<p>3. Fehlender oder falscher elektrischer Standard in der XDC-Datei.</p>
+<p>4. Fehler in der Testbench, wodurch falsche Eingangskombinationen geprüft werden.</p>
+<p>5. Unterschiedliche Signalreihenfolge zwischen Digital-Export und Vivado-Projekt.</p>
+<p>6. Nicht erfolgreich ausgeführte Synthese oder Implementation.</p>
+<p>7. Probleme beim Verbinden des PYNQ-Z1 im Hardware Manager.</p>
+<p>8. Verwechslung zwischen kombinatorischer Logik und getakteter Registerlogik.</p>
+<p></p>
+<h2>12 Fazit</h2>
+<p></p>
+<p>Der Versuch zeigte den vollständigen Ablauf von einer digitalen Schaltungsidee bis zur Umsetzung auf einem FPGA. Der 4-Bit-zu-7-Segment-Decoder wurde zunächst in Digital geprüft, anschließend nach VHDL exportiert, in Vivado simuliert und schließlich auf dem PYNQ-Z1 getestet. Die Hardwareausgabe bestätigte die korrekte Funktion der kombinatorischen Schaltung.</p>
+<p></p>
+<p>Der Notengenerator ergänzte den Versuch um eine synchrone Schaltung mit gespeichertem Zustand. Dadurch wurde deutlich, dass VHDL sowohl reine Schaltnetze als auch getaktete Schaltwerke beschreiben kann. Insgesamt machte der Versuch sichtbar, dass bei FPGA-Projekten nicht nur die Logik selbst, sondern auch Testbench, Constraints, Synthese, Implementation und Hardwareprogrammierung zuverlässig zusammenpassen müssen.</p>
+</body></html>

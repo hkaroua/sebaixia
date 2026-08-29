@@ -1,0 +1,133 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Versuch 2 Protokoll</title><style>body{font-family:Arial,sans-serif;max-width:900px;margin:32px auto;line-height:1.45}table{border-collapse:collapse;margin:12px 0;width:100%}td,th{border:1px solid #888;padding:6px;vertical-align:top}h1{font-size:24px}h2{font-size:20px}</style></head><body>
+<h1>Versuchsprotokoll Versuch 2 - Kombinatorische Logik</h1>
+<p></p>
+<p>Praktikum: Digitaltechnik</p>
+<p>Versuch: 2 - Kombinatorische Logik</p>
+<p>Name: Precious Adaugo Nnamaka</p>
+<p>Betreuer: Prof. Dr.-Ing. Peter Zipf</p>
+<p></p>
+<h2>1 Ziel des Versuchs</h2>
+<p></p>
+<p>Ziel des zweiten Versuchs war die Realisierung und Ueberpruefung kombinatorischer Logikschaltungen. Im Mittelpunkt standen ein Volladdierer und dessen Erweiterung zu einem 4-Bit-Ripple-Carry-Addierer. Die Schaltung sollte zunaechst in Digital entworfen und simuliert, anschliessend mit 74er-Logikbausteinen auf dem Steckbrett aufgebaut und mit dem Arduino geprueft werden. Zusaetzlich wurde die Durchlaufzeit entlang des kritischen Pfades mit dem Oszilloskop untersucht.</p>
+<p></p>
+<h2>2 Verwendete Bauteile und Geraete</h2>
+<p></p>
+<p>Bauteil / Geraet &nbsp; | &nbsp; Verwendung</p>
+<p>Arduino Uno &nbsp; | &nbsp; Erzeugung und Auswertung der Eingangskombinationen</p>
+<p>74LS86 &nbsp; | &nbsp; XOR-Gatter fuer Summenbildung</p>
+<p>74LS08 &nbsp; | &nbsp; AND-Gatter fuer Uebertragsbildung</p>
+<p>74LS32 &nbsp; | &nbsp; OR-Gatter fuer Zusammenfuehrung der Teiluebertraege</p>
+<p>Steckbrett und Jumper-Leitungen &nbsp; | &nbsp; Aufbau der Schaltung</p>
+<p>LEDs mit Vorwiderstaenden &nbsp; | &nbsp; Anzeige der Ausgangszustaende</p>
+<p>Digitales Oszilloskop &nbsp; | &nbsp; Messung der Durchlaufzeit</p>
+<p>Digital-Datei corrected_2.dig &nbsp; | &nbsp; Simulation und Dokumentation des Schaltungsentwurfs</p>
+<p></p>
+<h2>3 Theoretische Grundlagen</h2>
+<p></p>
+<p>Ein Halbaddierer addiert zwei einstellige Binaerzahlen A und B. Er besitzt den Summenausgang S und den Uebertragsausgang Co. Die zugehoerigen Funktionen lauten:</p>
+<p></p>
+<p>S = A XOR B</p>
+<p>Co = A AND B</p>
+<p></p>
+<p>Ein Volladdierer beruecksichtigt zusaetzlich den Eingangsuebertrag Ci. Er kann aus zwei Halbaddierern und einem OR-Gatter aufgebaut werden. Die Funktionen lauten:</p>
+<p></p>
+<p>S = A XOR B XOR Ci</p>
+<p>Co = (A AND B) OR (Ci AND (A XOR B))</p>
+<p></p>
+<p>Die Wahrheitstabelle des Volladdierers lautet:</p>
+<p></p>
+<p>A &nbsp; | &nbsp; B &nbsp; | &nbsp; Ci &nbsp; | &nbsp; S &nbsp; | &nbsp; Co</p>
+<h2>0 | 0 | 0 | 0 | 0</h2>
+<h2>0 | 0 | 1 | 1 | 0</h2>
+<h2>0 | 1 | 0 | 1 | 0</h2>
+<h2>0 | 1 | 1 | 0 | 1</h2>
+<h2>1 | 0 | 0 | 1 | 0</h2>
+<h2>1 | 0 | 1 | 0 | 1</h2>
+<h2>1 | 1 | 0 | 0 | 1</h2>
+<h2>1 | 1 | 1 | 1 | 1</h2>
+<p></p>
+<p>Bei gleicher Gatterverzoegerung liegt der kritische Pfad des Volladdierers im Uebertragspfad. Fuer die Bildung von Co durchlaeuft ein Signal im unguenstigsten Fall die Folge XOR, AND und OR. Damit ergeben sich fuer den Volladdierer drei Gatterverzoegerungen. Beim Ripple-Carry-Addierer wird der Uebertrag seriell von der niederwertigsten zur hoechstwertigen Stufe weitergereicht. Dadurch waechst die maximale Durchlaufzeit naeherungsweise linear mit der Wortbreite.</p>
+<p></p>
+<h2>4 Versuchsdurchfuehrung</h2>
+<p></p>
+<p>4.1 Entwurf und Simulation</p>
+<p></p>
+<p>Vor dem Laboraufbau wurde die Addiererschaltung in Digital entworfen. Fuer den Volladdierer wurden die Bausteine 74LS86, 74LS08 und 74LS32 verwendet. Anschliessend wurde der Entwurf schrittweise zu einem 4-Bit-Ripple-Carry-Addierer erweitert. Die Datei corrected_2.dig dokumentiert den simulierten Schaltungsentwurf.</p>
+<p></p>
+<p>4.2 Aufbau des Volladdierers und Fehlersuche</p>
+<p></p>
+<p>Zunaechst wurde ein Volladdierer mit XOR-, AND- und OR-Gattern auf dem Steckbrett aufgebaut. Der Arduino legte nacheinander alle acht Eingangskombinationen fuer A, B und Ci an. Die Ausgangszustaende fuer S und Co wurden mit LEDs angezeigt und mit der vorbereiteten Wahrheitstabelle verglichen.</p>
+<p></p>
+<p>Beim Aufbau trat zunaechst ein Fehler auf. Nach ungefaehr einer Stunde Fehlersuche wurde festgestellt, dass das verwendete OR-IC beschaedigt war. Wie in der Fotodokumentation zu erkennen ist, fehlte an dem IC ein Bein am Eingang 1. Dadurch konnte das betreffende Eingangssignal nicht korrekt in das OR-Gatter eingespeist werden. Der Fehler lag deshalb nicht an der booleschen Funktion des Volladdierers, sondern an einem defekten Bauteil beziehungsweise an einem unterbrochenen IC-Anschluss.</p>
+<p></p>
+<p>Der Defekt wurde dokumentiert und bei der weiteren Fehlersuche beruecksichtigt. Nach dem Erkennen des Problems wurde die Verdrahtung erneut geprueft und der betroffene OR-Eingang nicht mehr als zuverlaessige Signalverbindung betrachtet. Zusaetzlich wurde im Arduino-Test ein falscher digitaler Zustand korrigiert: Pin 6 wurde von true auf false geaendert. Danach stimmten die beobachteten Ausgangswerte mit der Soll-Wahrheitstabelle ueberein.</p>
+<p></p>
+<p>Abbildung 1: Aufbau des Volladdierers auf dem Steckbrett.</p>
+<p>Abbildung 2: Dokumentierter Fehler beim Aufbau: Das OR-IC war beschaedigt, da ein Bein am Eingang 1 fehlte.</p>
+<p></p>
+<p>4.3 Erweiterung zum 4-Bit-Ripple-Carry-Addierer</p>
+<p></p>
+<p>Nach der Funktionspruefung des einzelnen Volladdierers wurde die Schaltung schrittweise zu einem 4-Bit-Ripple-Carry-Addierer erweitert. Der Ausgangsuebertrag einer Stufe wurde jeweils mit dem Eingangsuebertrag der naechsthoeheren Stufe verbunden. Nach jeder Erweiterung wurde die Funktion erneut mit dem Arduino geprueft. Dieses schrittweise Vorgehen war sinnvoll, weil Fehler so direkt einer bestimmten Addierstufe zugeordnet werden konnten.</p>
+<p></p>
+<p>Die Summenausgaenge wurden als S0 bis S3 betrachtet. Der letzte Uebertrag bildete den Ausgang Co des gesamten 4-Bit-Addierers.</p>
+<p></p>
+<p>Abbildung 3: Gesamtaufbau des 4-Bit-Ripple-Carry-Addierers mit Messleitungen.</p>
+<p></p>
+<p>4.4 Messung der Durchlaufzeit</p>
+<p></p>
+<p>Zur Messung der Durchlaufzeit wurde eine Eingangskombination gewaehlt, bei der ein Uebertrag durch alle vier Volladdierstufen laeuft. Ein geeignetes Beispiel ist:</p>
+<p></p>
+<p>A = 1111</p>
+<p>B = 0000</p>
+<p>Ci: 0 -&gt; 1</p>
+<p></p>
+<p>Durch diesen Wechsel entsteht in der niederwertigsten Stufe ein Uebertrag, der nacheinander durch die folgenden Stufen weitergereicht wird. Ein Oszilloskopkanal erfasste den ausloesenden Eingang, der zweite Kanal den Ausgang am Ende des kritischen Pfades.</p>
+<p></p>
+<h2>5 Ergebnisse und Auswertung</h2>
+<p></p>
+<p>5.1 Funktionspruefung</p>
+<p></p>
+<p>Nach der Korrektur der Fehler stimmten die Ausgaenge des Volladdierers mit der Wahrheitstabelle ueberein. Auch die schrittweise erweiterte 4-Bit-Schaltung lieferte die erwarteten Binaersummen. Die Vorgehensweise, nach jeder hinzugefuegten Stufe erneut zu pruefen, erwies sich als wichtig, da Verdrahtungsfehler oder defekte Bauteile schneller eingegrenzt werden konnten.</p>
+<p></p>
+<p>Der Defekt am OR-IC zeigte, dass bei praktischen Logikaufbauten nicht nur die Schaltungslogik, sondern auch die Bauteile selbst kontrolliert werden muessen. Ein fehlendes IC-Bein kann dazu fuehren, dass ein Eingang elektrisch offen bleibt oder gar nicht mit der Schaltung verbunden ist. Dadurch entstehen falsche Ausgangswerte, obwohl der theoretische Schaltungsentwurf korrekt ist.</p>
+<p></p>
+<p>5.2 Laufzeit und kritischer Pfad</p>
+<p></p>
+<p>Am Oszilloskop wurde zwischen dem Eingangssprung und der stabilen Reaktion am Ausgang eine Zeitdifferenz von</p>
+<p></p>
+<p>Delta t = 82,80 ns</p>
+<p></p>
+<p>gemessen. Der Kehrwert dieser Zeit betraegt:</p>
+<p></p>
+<h2>1 / 82,80 ns = ca. 12,07 MHz</h2>
+<p></p>
+<p>Dieser Wert ist jedoch nur der mathematische Kehrwert der gemessenen Verzögerung. Er darf nicht ohne weitere Timing-Reserven als sichere maximale Taktfrequenz verwendet werden. In einer realen Schaltung muessen zusaetzlich Setup-Zeiten, Hold-Zeiten, Pegelstabilitaet und Stoerabstaende beruecksichtigt werden.</p>
+<p></p>
+<p>Waehrend der Messung konnten kurze Zwischenzustaende beziehungsweise Glitches auftreten. Diese entstehen, weil Signale verschiedene Gatterpfade mit unterschiedlichen Laufzeiten durchlaufen. Besonders beim Ripple-Carry-Addierer ist dies erwartbar, da der Uebertrag nicht gleichzeitig in allen Stufen ankommt, sondern von Stufe zu Stufe weitergegeben wird.</p>
+<p></p>
+<p>Die Durchlaufzeit eines Ripple-Carry-Addierers steigt mit zunehmender Wortbreite an. Naeherungsweise gilt:</p>
+<p></p>
+<p>tpd(n) = t0 + n * tCarry</p>
+<p></p>
+<p>Dabei beschreibt n die Anzahl der Addierstufen. Wird die Wortbreite erhoeht, verlaengert sich der Carry-Pfad entsprechend. Das ist der wesentliche Nachteil des Ripple-Carry-Prinzips gegenueber schnelleren Architekturen wie dem Carry-Look-Ahead-Addierer.</p>
+<p></p>
+<h2>6 Fehlerbetrachtung</h2>
+<p></p>
+<p>Die wichtigsten Fehlerquellen des Versuchs waren:</p>
+<p></p>
+<p>1. Defektes OR-IC: Am OR-Gatter fehlte ein Bein am Eingang 1. Dadurch war der Eingang nicht korrekt angeschlossen und die Schaltung konnte zunaechst nicht wie erwartet funktionieren.</p>
+<p>2. Verdrahtungsaufwand: Der 4-Bit-Ripple-Carry-Addierer benoetigt viele Leitungen. Dadurch steigt die Wahrscheinlichkeit von Steckfehlern und Kontaktproblemen.</p>
+<p>3. Falscher digitaler Testzustand: Im Arduino-Test musste Pin 6 von true auf false korrigiert werden.</p>
+<p>4. Steckbrettkontakte: Wackelkontakte oder nicht vollstaendig eingesteckte Leitungen koennen falsche Logikpegel verursachen.</p>
+<p>5. Messbelastung: Oszilloskop-Tastkoepfe und Masseleitungen koennen schnelle Signalflanken beeinflussen.</p>
+<p>6. Unterschiedliche Gatterlaufzeiten: XOR-, AND- und OR-Gatter besitzen in der Praxis nicht exakt dieselbe Verzögerung. Dadurch koennen kurze Glitches entstehen.</p>
+<p>7. Cursorposition am Oszilloskop: Die manuelle Cursorplatzierung begrenzt die Genauigkeit der Laufzeitmessung.</p>
+<p></p>
+<h2>7 Fazit</h2>
+<p></p>
+<p>Der Volladdierer und der daraus aufgebaute 4-Bit-Ripple-Carry-Addierer konnten erfolgreich untersucht werden. Die theoretische Funktion wurde durch die Wahrheitstabelle beschrieben und anschliessend mit dem Arduino ueberprueft. Bei der Durchfuehrung trat zunaechst ein Fehler auf, da das verwendete OR-IC beschaedigt war und ein Bein am Eingang 1 fehlte. Dieser Defekt erklaerte die fehlerhaften Ausgangswerte beim ersten Aufbau und wurde in der Fehlersuche dokumentiert.</p>
+<p></p>
+<p>Nach der Korrektur der Verdrahtung beziehungsweise der Beruecksichtigung des defekten ICs sowie der Anpassung des Arduino-Testsignals stimmten die Ausgaenge mit den erwarteten Ergebnissen ueberein. Die gemessene Durchlaufzeit von 82,80 ns bestaetigt, dass sich der Uebertrag beim Ripple-Carry-Addierer nacheinander durch die einzelnen Stufen ausbreitet. Deshalb nimmt die maximale Laufzeit mit steigender Wortbreite naeherungsweise linear zu.</p>
+<p></p>
+<p>Der Versuch zeigt damit sowohl die theoretische Funktionsweise kombinatorischer Addiererschaltungen als auch die Bedeutung systematischer Fehlersuche im praktischen Laboraufbau.</p>
+</body></html>
